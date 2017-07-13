@@ -1,1 +1,4 @@
-show.erb
+<p><%= @user.username %>'s Tweets</p>
+<% @user.tweets.each do |tweet| %>
+	<p><%= tweet.content %></p>
+<% end %>
