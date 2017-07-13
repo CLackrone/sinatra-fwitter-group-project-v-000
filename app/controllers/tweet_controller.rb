@@ -45,7 +45,7 @@ class TweetController < ApplicationController
 		end
 	end
 
-	patch '/tweets/:id' do 
+	post '/tweets/:id' do 
 		if params[:content].empty?
 			redirect to "/tweets/#{params[:id]}/edit"
 		else
