@@ -1,5 +1,7 @@
 <p>Welcome, </p>
 
+<% if @tweets %>
 <% @tweets.each do |tweet| %>
 	<p><%= tweet.content %></p>
-	<% end %>
+<% end %>
+<% end %>

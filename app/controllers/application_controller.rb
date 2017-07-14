@@ -9,12 +9,24 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "password_security"
   end
 
-  get '/' do 
-  	erb :index
+  get '/' do
+    erb :index
   end
 
-
-
+  delete '/tweets/:id/delete' do
+    if logged_in? && current_user
+    #if logged_in? && @tweet.user_id == current_user.id
+      @tweet = Tweet.find_by_id(params[:id])
+      if @tweet.user_id == current_user.id
+        @tweet.delete
+        redirect '/tweets'
+      else
+        redirect '/tweets'
+      end
+    else
+      redirect '/login'
+    end
+  end
 
   helpers do
     def logged_in?
@@ -22,7 +34,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_user
-      User.find(session[:user_id])
+      User.find_by(session[:user_id])
     end
   end
 
